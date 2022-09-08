@@ -29,7 +29,7 @@ const DayListItem = (props) => {
       className={buttonClass}
       >
       <h2 className="text--regular">
-        Day Name
+        {props.name}
       </h2>
       <h3 className="text--light">
         {formatSpots(props.spots)}
