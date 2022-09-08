@@ -10,6 +10,19 @@ const DayListItem = (props) => {
   });
 
 
+  const formatSpots = (spots) => {
+    if (spots === 1) {
+      return '1 spot remaining';
+    } else if (spots > 1) {
+      return `${spots} spots remaining`;
+    } else {
+      return 'no spots remaining';
+    }
+  };
+
+
+
+
   return (
     <li 
       onClick={() => props.setDay(props.name)}
@@ -19,7 +32,7 @@ const DayListItem = (props) => {
         Day Name
       </h2>
       <h3 className="text--light">
-        {props.spots} spots remaining
+        {formatSpots(props.spots)}
       </h3>
     </li>
   );
