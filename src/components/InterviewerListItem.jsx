@@ -1,6 +1,8 @@
 // src/components/InterviewerListItem.jsx
 import React from "react";
 
+import 'components/InterviewerListItem.scss';
+
 const InterviewerListItem = (props) => {
 
   return (
