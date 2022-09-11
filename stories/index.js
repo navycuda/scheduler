@@ -153,11 +153,11 @@ storiesOf("Appointment", module)
     onAdd={action('onAdd')}
   />)
   .add("Show", () => <Show 
-    student="Lydia Miller-Jones"
+    student={"Lydia Miller-Jones"}
     interviewer={interviewer}
     onEdit={action('onEdit')}
     onDelete={action('onDelete')}
   />)
   .add('Confirm', () => <Confirm
-  
+    message={'Delete the appointment?'}
   />);
