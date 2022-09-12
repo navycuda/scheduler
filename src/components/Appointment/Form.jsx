@@ -1,9 +1,12 @@
 // src/components/Appointment/Form.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import Button from 'components/Button';
 import InterviewerList from 'components/InterviewerList';
 
 const Form = (props) => {
+  const [ student, setStudent ] = useState(props.student || "");
+  const [ interviewer, setInterviewer ] = useState(props.interviewer || null);
+
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
