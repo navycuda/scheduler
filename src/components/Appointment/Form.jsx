@@ -1,0 +1,36 @@
+// src/components/Appointment/Form.jsx
+import React from 'react';
+import Button from 'components/Button';
+import InterviewerList from 'components/InterviewerList';
+
+const Form = (props) => {
+  return (
+    <main className="appointment__card appointment__card--create">
+      <section className="appointment__card-left">
+        <form autoComplete="off">
+          <input
+            className="appointment__create-input text--semi-bold"
+            name={props.student}
+            type="text"
+            placeholder={props.student}
+            /*
+              This must be a controlled component
+              your code goes here
+            */
+          />
+        </form>
+        <InterviewerList 
+          interviewers={props.interviewers}
+        />
+      </section>
+      <section className="appointment__card-right">
+        <section className="appointment__actions">
+          <Button danger >Cancel</Button>
+          <Button confirm >Save</Button>
+        </section>
+      </section>
+    </main>
+  );
+};
+
+export default Form;
