@@ -13,17 +13,20 @@ const Form = (props) => {
         <form autoComplete="off">
           <input
             className="appointment__create-input text--semi-bold"
-            name={props.student}
+            name={student}
             type="text"
             placeholder={props.student}
             /*
               This must be a controlled component
               your code goes here
             */
+           value={student}
+           onChange={(e) => setStudent(e.target.value)}
           />
         </form>
         <InterviewerList 
           interviewers={props.interviewers}
+          interviewer={interviewer}
         />
       </section>
       <section className="appointment__card-right">
