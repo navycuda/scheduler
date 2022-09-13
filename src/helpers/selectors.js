@@ -7,10 +7,5 @@ export const getAppointmentsByIds = (appointments, ids) => {
 
 export const getAppointmentsForDay = (state, day) => {
   const selectedDay = state.days.find(({ name }) => name === day);
-  if (selectedDay) {
-    console.log('selectedDay: ', selectedDay);
-    console.log('day', day);
-    return getAppointmentsByIds(state.appointments, selectedDay.appointments);
-  }
-  return [];
+  return !selectedDay ? [] : getAppointmentsByIds(state.appointments, selectedDay.appointments);
 };
