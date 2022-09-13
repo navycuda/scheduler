@@ -52,13 +52,16 @@ export default function Application(props) {
   const [days, setDays] = useState([]);
   
   const appointments = Object.values(fakeAppointments).map((appointment) => {
-
     return (
       <Appointment 
         key={appointment.id}
         {...appointment}
       />
     );
+  });
+
+  const [state, setState] = useState({
+    day, days, appointments
   });
 
   useEffect(() => {
