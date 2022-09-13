@@ -1,27 +1,12 @@
 import React from "react";
-import { useState } from "react";
+import Axios from "axios";
+import { useState, useEffect } from "react";
 
 import "components/Application.scss";
 import DayList from "./DayList";
 import Appointment from "./Appointment";
 
-const days = [
-  {
-    id: 1,
-    name: "Monday",
-    spots: 2,
-  },
-  {
-    id: 2,
-    name: "Tuesday",
-    spots: 5,
-  },
-  {
-    id: 3,
-    name: "Wednesday",
-    spots: 0,
-  },
-];
+
 const fakeAppointments = {
   "1": {
     id: 1,
@@ -64,7 +49,7 @@ const fakeAppointments = {
 
 export default function Application(props) {
   const [day, setDay] = useState('Monday');
-
+  const [days, setDays] = useState([]);
   
   const appointments = Object.values(fakeAppointments).map((appointment) => {
 
@@ -76,6 +61,14 @@ export default function Application(props) {
     );
   });
 
+  useEffect(() => {
+    const url = '/api/days';
+    Axios.get(url)
+      .then((response) => {
+        console.log(response);
+        setDays([...response.data]);
+      })
+  }, []);
 
 
   return (
