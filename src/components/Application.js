@@ -66,7 +66,7 @@ export default function Application(props) {
   const [day, setDay] = useState('Monday');
 
   
-  const appointments = Object.values(appointments).map((appointment) => {
+  const appointments = Object.values(fakeAppointments).map((appointment) => {
 
     return (
       <Appointment 
