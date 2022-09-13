@@ -48,9 +48,15 @@ const fakeAppointments = {
 
 
 export default function Application(props) {
-  const [day, setDay] = useState('Monday');
-  const [days, setDays] = useState([]);
+  const [state, setState] = useState({
+    day: 'Monday',
+    days: [],
+    appointments: {}
+  });
   
+  const setDay = (day) => setState({ ...state, day});
+  const setDays = (days) => setState((prev) => ({ ...prev, days}));
+
   const appointments = Object.values(fakeAppointments).map((appointment) => {
     return (
       <Appointment 
@@ -60,9 +66,6 @@ export default function Application(props) {
     );
   });
 
-  const [state, setState] = useState({
-    day, days, appointments
-  });
 
   useEffect(() => {
     const url = '/api/days';
@@ -85,8 +88,8 @@ export default function Application(props) {
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
         <DayList 
-          days={days}
-          value={day}
+          days={state.days}
+          value={state.day}
           onChange={setDay}
           />
         </nav>
