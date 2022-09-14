@@ -9,3 +9,7 @@ export const getAppointmentsForDay = (state, day) => {
   const selectedDay = state.days.find(({ name }) => name === day);
   return !selectedDay ? [] : getAppointmentsByIds(state.appointments, selectedDay.appointments);
 };
+
+export const getInterview = (state, interview) => {
+  return null;
+};
