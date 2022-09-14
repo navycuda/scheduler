@@ -1,4 +1,7 @@
 // src/hooks/useVisualMode.js
-export default function useVisualMode(){
-  
+import { useState } from "react";
+
+export default function useVisualMode(initial){
+  const [mode, setMode] = useState(initial);
+  return { mode };
 };
