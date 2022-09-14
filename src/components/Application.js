@@ -45,7 +45,7 @@ const fakeAppointments = {
     time: "4pm",
   }
 };
-
+fakeAppointments.length = 0;
 
 export default function Application(props) {
   const [state, setState] = useState({
@@ -68,12 +68,25 @@ export default function Application(props) {
 
 
   useEffect(() => {
-    const url = '/api/days';
-    Axios.get(url)
-      .then((response) => {
-        console.log(response);
-        setDays([...response.data]);
-      })
+    const urlGetDays = '/api/days';
+    const urlGetAppointments = '/api/appointments';
+    const urlGetInterviewers = '/api/interviewers';
+    // Axios.get(url)
+    //   .then((response) => {
+    //     console.log(response);
+    //     setDays([...response.data]);
+    //   })
+
+    Promise.all([
+      Axios.get(urlGetDays),
+      Axios.get(urlGetAppointments),
+      Axios.get(urlGetInterviewers)
+    ])
+      .then((all) => {
+
+      });
+
+
   }, []);
 
 
