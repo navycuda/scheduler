@@ -60,7 +60,7 @@ export default function Application(props) {
 
 
   const appointments = Object.values(getAppointmentsForDay(state, state.day)).map((appointment) => {
-    const interview = getInterview(state, appointment.interview)
+    const interview = getInterview(state, appointment.interview);
   
     return (
       <Appointment 
@@ -96,7 +96,8 @@ export default function Application(props) {
         setState((previous) => ({
           ...previous,
           days: all[0].data,
-          appointments: all[1].data
+          appointments: all[1].data,
+          interviewers:all[2].data
         }));
       });
 
