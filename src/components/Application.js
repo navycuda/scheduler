@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import "components/Application.scss";
 import DayList from "./DayList";
 import Appointment from "./Appointment";
-
+import { getAppointmentsForDay } from "helpers/selectors";
 
 const fakeAppointments = {
   "1": {
@@ -57,7 +57,9 @@ export default function Application(props) {
   const setDay = (day) => setState({ ...state, day});
   const setDays = (days) => setState((prev) => ({ ...prev, days}));
 
-  const appointments = Object.values(fakeAppointments).map((appointment) => {
+
+
+  const appointments = Object.values(getAppointmentsForDay(state, state.day)).map((appointment) => {
     return (
       <Appointment 
         key={appointment.id}
@@ -80,10 +82,17 @@ export default function Application(props) {
     Promise.all([
       Axios.get(urlGetDays),
       Axios.get(urlGetAppointments),
-      Axios.get(urlGetInterviewers)
     ])
       .then((all) => {
-
+        for (const each of all) {
+          console.log(each);
+        };
+        console.log(all);
+        setState((previous) => ({
+          ...previous,
+          days: all[0].data,
+          appointments: all[1].data
+        }));
       });
 
 
