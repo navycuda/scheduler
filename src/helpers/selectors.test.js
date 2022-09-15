@@ -43,8 +43,6 @@ const state = {
   }
 };
 
-
-
 test("getAppointmentsForDay returns an array", () => {
   const result = getAppointmentsForDay(state, "Monday");
   expect(Array.isArray(result)).toBe(true);
@@ -71,11 +69,6 @@ test("getAppointmentsForDay returns an empty array when the day is not found", (
   expect(result.length).toEqual(0);
 });
 
-
-
-
-
-
 test('getInterviewersForDay returns an array', () => {
   const result = getInterviewersForDay(state, "Monday");
   expect(Array.isArray(result)).toBe(true);
@@ -85,8 +78,9 @@ test('getInterviewersForDay returns an array with a length matching the number o
   const result = getInterviewersForDay(state, "Monday");
   expect(result.length).toEqual(1);
 });
-test('getInterviewersForDay returns an array containing the correct interviewer objects', () => {
 
+test('getInterviewersForDay returns an array containing the correct interviewer objects', () => {
+  const result = getInterviewersForDay(state, 'Tuesday')
 });
 test('getInterviewersForDay returns an empty array', () => {
 
