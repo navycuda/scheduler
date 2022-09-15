@@ -18,7 +18,6 @@ export default function useVisualMode(initial){
         return previous.slice(0, previous.length - 1);
       }
     });
-
   }
 
   return { mode:history[history.length - 1], transition, back };
