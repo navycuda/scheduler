@@ -76,6 +76,24 @@ test("getAppointmentsForDay returns an empty array when the day is not found", (
 
 
 
+test('getInterviewersForDay returns an array', () => {
+
+});
+
+test('getInterviewersForDay returns an array with a length matching the number of interviewers for that day', () => {
+
+});
+test('getInterviewersForDay returns an array containing the correct interviewer objects', () => {
+
+});
+test('getInterviewersForDay returns an empty array', () => {
+
+});
+test('getInterviewersForDay returns an empty array', () => {
+
+});
+
+
 
 
 
