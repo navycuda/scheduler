@@ -21,3 +21,7 @@ export const getInterview = (state, interview) => {
     student: interview.student
   }
 };
+
+export const getInterviewersForDay = (state, day) => {
+
+};
