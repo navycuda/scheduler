@@ -16,6 +16,10 @@ export default function Application(props) {
     appointments: {}
   });
   
+  const bookInterview = (id, interview) => {
+    console.log(id, interview);
+  };
+
   const setDay = (day) => setState({ ...state, day});
 
   const appointments = Object.values(getAppointmentsForDay(state, state.day)).map((appointment) => {
@@ -27,6 +31,7 @@ export default function Application(props) {
         id={appointment.id}
         time={appointment.time}
         interview={interview}
+        bookInterview={bookInterview}
       />
     );
   });
