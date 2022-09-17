@@ -6,11 +6,15 @@ import Header from "./Header";
 import Show from "./Show";
 import Empty from "./Empty";
 import Form from "./Form";
+import Status from "./Status";
+import Confirm from "./Confirm";
 import useVisualMode from "hooks/useVisualMode";
 
 const EMPTY = 'EMPTY';
 const SHOW = 'SHOW';
 const CREATE = 'CREATE';
+const SAVING = 'SAVING';
+const CONFIRM = 'CONFIRM';
 
 
 const Appointment = (props) => {
@@ -22,12 +26,15 @@ const Appointment = (props) => {
     // console.log('name', name);
     // console.log('interviewer', interviewer);
     // console.log('appointment', props);
+    transition(SAVING)
     const interview = {
       student: name,
       interviewer
     };
-    props.bookInterview(props.id, interview);
-    transition(SHOW);
+    props.bookInterview(props.id, interview)
+      .then(() => {
+        transition(SHOW);
+      });
   };
 
   return (
@@ -49,6 +56,16 @@ const Appointment = (props) => {
           interviewers={props.interviewers}
           onCancel={back}
           onSave={save}
+        />
+      }
+      { mode === SAVING &&
+        <Status 
+          message={'Saving'}
+        />
+      }
+      { mode === CONFIRM &&
+        <Confirm
+          
         />
       }
     </article>
