@@ -14,6 +14,7 @@ const EMPTY = 'EMPTY';
 const SHOW = 'SHOW';
 const CREATE = 'CREATE';
 const SAVING = 'SAVING';
+const DELETE = 'DELETE';
 const CONFIRM = 'CONFIRM';
 
 
@@ -34,6 +35,14 @@ const Appointment = (props) => {
     props.bookInterview(props.id, interview)
       .then(() => {
         transition(SHOW);
+      });
+  };
+
+  const cancel = () => {
+    transition(DELETE);
+    props.cancelInterview(props.id)
+      .then(() => {
+        transition(EMPTY);
       });
   };
 
@@ -65,9 +74,15 @@ const Appointment = (props) => {
           message={'Saving'}
         />
       }
+      { mode === DELETE &&
+        <Status
+          message={'Deleting'}
+        />
+      }
       { mode === CONFIRM &&
         <Confirm
-          onConfirm={}
+          onCancel={back}
+          cancelInterview={cancel}
         />
       }
     </article>
