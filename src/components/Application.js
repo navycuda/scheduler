@@ -8,7 +8,8 @@ import Appointment from "./Appointment";
 import { 
   getAppointmentsForDay,
   getInterview,
-  getInterviewersForDay
+  getInterviewersForDay,
+  updateAppointmentsByState
 } from "helpers/selectors";
 
 /** The meat and potatoes **/
@@ -45,14 +46,7 @@ export default function Application(props) {
   };
 
   const bookInterview = (id, interview) => {
-    const appointment = {
-      ...state.appointments[id],
-      interview: {...interview}
-    };
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment
-    };
+    const appointments = updateAppointmentsByState(state, id, interview);
 
     return Axios.put(updateAppointments(id), { interview })
       .then(() => {
@@ -61,6 +55,11 @@ export default function Application(props) {
           appointments
         });
       });
+  };
+
+  const editInterview = async (id, interview) => {
+    await cancelInterview(id);
+    await bookInterview(id, interview);
   };
 
   const setDay = (day) => setState({ ...state, day});
@@ -77,6 +76,7 @@ export default function Application(props) {
         interview={interview}
         interviewers={interviewers}
         bookInterview={bookInterview}
+        editInterview={editInterview}
         cancelInterview={cancelInterview}
       />
     );

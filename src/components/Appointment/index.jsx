@@ -47,6 +47,20 @@ const Appointment = (props) => {
       });
   };
 
+  const edit = (name, interviewer) => {
+    transition(SAVING);
+    const interview = {
+      student: name,
+      interviewer
+    };
+    props.editInterview(props.id, interview)
+      .then(() => {
+        transition(SHOW);
+      })
+  };
+
+
+  console.log(`Appointment id: ${props.id} props`, props);
 
   return (
     <article className="appointment">
@@ -61,13 +75,23 @@ const Appointment = (props) => {
           student={props.interview.student}
           interviewer={props.interview.interviewer}
           onDelete={() => transition(CONFIRM)}
-          />
-        }
+          onEdit={() => transition(EDIT)}
+        />
+      }
       { mode === CREATE &&
         <Form
           interviewers={props.interviewers}
           onCancel={back}
           onSave={save}
+        />
+      }
+      { mode === EDIT &&
+        <Form
+          interviewers={props.interviewers}
+          student={props.interview.student}
+          instructor={props.interview.instructor}
+          onCancel={back}
+          onSave={edit} 
         />
       }
       { mode === SAVING &&
@@ -84,11 +108,6 @@ const Appointment = (props) => {
         <Confirm
           onCancel={back}
           cancelInterview={cancel}
-        />
-      }
-      { mode === EDIT &&
-        <Form
-        
         />
       }
     </article>

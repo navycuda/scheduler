@@ -22,6 +22,17 @@ export const getInterview = (state, interview) => {
   }
 };
 
+export const updateAppointmentsByState = (state, id, interview) => {
+  const appointment = {
+    ...state.appointments[id],
+    interview: {...interview}
+  };
+  return {
+    ...state.appointments,
+    [id]: appointment
+  };
+};
+
 export const getInterviewersForDay = (state) => {
   const selectedDay = state.days.find(({ name }) => name === state.day);
   if (state.days.length === 0 || !selectedDay) {
