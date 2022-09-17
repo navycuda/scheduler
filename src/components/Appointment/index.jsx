@@ -26,7 +26,7 @@ const Appointment = (props) => {
     // console.log('name', name);
     // console.log('interviewer', interviewer);
     // console.log('appointment', props);
-    transition(SAVING)
+    transition(SAVING);
     const interview = {
       student: name,
       interviewer
@@ -36,6 +36,7 @@ const Appointment = (props) => {
         transition(SHOW);
       });
   };
+
 
   return (
     <article className="appointment">
@@ -49,6 +50,7 @@ const Appointment = (props) => {
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer}
+          onDelete={() => transition(CONFIRM)}
           />
         }
       { mode === CREATE &&
@@ -65,7 +67,7 @@ const Appointment = (props) => {
       }
       { mode === CONFIRM &&
         <Confirm
-          
+          onConfirm={}
         />
       }
     </article>
