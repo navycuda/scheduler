@@ -27,6 +27,7 @@ const Appointment = (props) => {
       interviewer
     };
     props.bookInterview(props.id, interview);
+    transition(SHOW);
   };
 
   return (
@@ -45,7 +46,7 @@ const Appointment = (props) => {
         }
       { mode === CREATE &&
         <Form
-          interviewers={[]}
+          interviewers={props.interviewers}
           onCancel={back}
           onSave={save}
         />

@@ -5,7 +5,11 @@ import { useState, useEffect } from "react";
 import "components/Application.scss";
 import DayList from "./DayList";
 import Appointment from "./Appointment";
-import { getAppointmentsForDay, getInterview } from "helpers/selectors";
+import { 
+  getAppointmentsForDay,
+  getInterview,
+  getInterviewersForDay
+} from "helpers/selectors";
 
 /** The meat and potatoes **/
 
@@ -13,7 +17,8 @@ export default function Application(props) {
   const [state, setState] = useState({
     day: 'Monday',
     days: [],
-    appointments: {}
+    appointments: {},
+    interviewers: {}
   });
   
   const bookInterview = (id, interview) => {
@@ -25,6 +30,10 @@ export default function Application(props) {
       ...state.appointments,
       [id]: appointment
     };
+
+    
+
+
     setState({
       ...state,
       appointments
@@ -33,7 +42,8 @@ export default function Application(props) {
   };
 
   const setDay = (day) => setState({ ...state, day});
-
+  const interviewers = getInterviewersForDay(state);
+  console.log('interviewers', interviewers);
   const appointments = Object.values(getAppointmentsForDay(state, state.day)).map((appointment) => {
     const interview = getInterview(state, appointment.interview);
   
@@ -43,6 +53,7 @@ export default function Application(props) {
         id={appointment.id}
         time={appointment.time}
         interview={interview}
+        interviewers={interviewers}
         bookInterview={bookInterview}
       />
     );
