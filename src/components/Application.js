@@ -21,6 +21,22 @@ export default function Application(props) {
     interviewers: {}
   });
   
+  // Used for both cancelInterview and bookInterview
+  const updateAppointments = (id) => `/api/appointments/${id}`;
+  
+  const cancelInterview = (id) => {
+    return Axios.delete(updateAppointments(id))
+      .then(() => {
+        setState({
+          ...state,
+          appointments:{
+            ...appointments,
+            [id]: null
+          }
+        });
+      });
+  };
+
   const bookInterview = (id, interview) => {
     const appointment = {
       ...state.appointments[id],
@@ -31,14 +47,13 @@ export default function Application(props) {
       [id]: appointment
     };
 
-    
-
-
-    setState({
-      ...state,
-      appointments
-    });
-    console.log(id, interview);
+    return Axios.put(updateAppointments(id), { interview })
+      .then(() => {
+        setState({
+          ...state,
+          appointments
+        });
+      });
   };
 
   const setDay = (day) => setState({ ...state, day});
