@@ -16,6 +16,7 @@ const CREATE = 'CREATE';
 const SAVING = 'SAVING';
 const DELETE = 'DELETE';
 const CONFIRM = 'CONFIRM';
+const EDIT = 'EDIT;'
 
 
 const Appointment = (props) => {
@@ -83,6 +84,11 @@ const Appointment = (props) => {
         <Confirm
           onCancel={back}
           cancelInterview={cancel}
+        />
+      }
+      { mode === EDIT &&
+        <Form
+        
         />
       }
     </article>
