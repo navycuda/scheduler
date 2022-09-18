@@ -9,6 +9,7 @@ import Form from "./Form";
 import Status from "./Status";
 import Confirm from "./Confirm";
 import useVisualMode from "hooks/useVisualMode";
+import Error from "./Error";
 
 const EMPTY = 'EMPTY';
 const SHOW = 'SHOW';
@@ -16,8 +17,9 @@ const CREATE = 'CREATE';
 const SAVING = 'SAVING';
 const DELETE = 'DELETE';
 const CONFIRM = 'CONFIRM';
-const EDIT = 'EDIT;'
-
+const EDIT = 'EDIT';
+const ERROR_SAVE = 'ERROR_SAVE';
+const ERROR_EDIT = 'ERROR_EDIT';
 
 const Appointment = (props) => {
   const { mode, transition, back } = useVisualMode(
@@ -36,6 +38,9 @@ const Appointment = (props) => {
     props.bookInterview(props.id, interview)
       .then(() => {
         transition(SHOW);
+      })
+      .catch(() => {
+        transition(ERROR_SAVE);
       });
   };
 
@@ -57,8 +62,16 @@ const Appointment = (props) => {
       .then(() => {
         transition(SHOW);
       })
+      .catch(() => {
+        transition(ERROR_EDIT);
+      });
   };
 
+  const doubleBack = () => {
+    back();
+    back();
+  }
+  
 
   console.log(`Appointment id: ${props.id} props`, props);
 
@@ -110,6 +123,18 @@ const Appointment = (props) => {
           cancelInterview={cancel}
         />
       }
+      { mode === ERROR_SAVE &&
+        <Error
+          message={'Error saving new!'}
+          onClose={doubleBack}
+        />
+      }
+      { mode === ERROR_EDIT &&
+        <Error
+          message={'Error saving edit!'}
+          onClose={doubleBack}
+        />
+      }      
     </article>
   )
 };
