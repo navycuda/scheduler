@@ -75,6 +75,8 @@ const Appointment = (props) => {
 
   console.log(`Appointment id: ${props.id} props`, props);
 
+  console.log('mode:', mode);
+
   return (
     <article className="appointment">
       <Header 
