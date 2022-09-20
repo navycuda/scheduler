@@ -23,18 +23,23 @@ export default function useApplicationData(){
   const cancelInterview = (id) => {
     return Axios.delete(updateAppointments(id))
       .then(() => {
-        const updatedState = {
-          ...state,
+        setState((prev) => ({
+          
+          ...prev,
           appointments:{
-            ...state.appointments,
+            ...prev.appointments,
             [id]: {
-              ...state.appointments[id],
+              ...prev.appointments[id],
               interview: null
             }
-          }
-        }
-        setState(updatedState);
-        console.log(updatedState);
+          },
+          days: prev.days.map((day) => {
+            if (day.name === prev.day) {
+              day.spots += 1;
+            }
+            return day;
+          })
+        }));
       });
   };
 
@@ -43,10 +48,16 @@ export default function useApplicationData(){
 
     return Axios.put(updateAppointments(id), { interview })
       .then(() => {
-        setState({
-          ...state,
+        setState((prev) => ({
+          ...prev,
+          days: prev.days.map((day) => {
+            if (day.name === prev.day) {
+              day.spots -= 1;
+            }
+            return day;
+          }),
           appointments
-        });
+        }));
       });
   };
 
@@ -82,6 +93,12 @@ export default function useApplicationData(){
 
   const setDay = (day) => setState({ ...state, day});
 
-
+  return {
+    state,
+    setDay,
+    bookInterview,
+    editInterview,
+    cancelInterview
+  }
 
 };
